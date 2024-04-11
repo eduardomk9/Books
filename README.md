@@ -17,7 +17,7 @@ It correctly bundles React in production mode and optimizes the build for the be
 
 High Lights this app:
 
-Authenticate and soter in local storage the token for the futere requests.
+Authenticate and store in local storage the token for the futere requests.
 Dynamic datagird as component, could filter, sort and export the results 
 
 ![image](https://github.com/eduardomk9/Books/assets/15438089/cd50ed3b-5734-4655-999e-09ff1ec695d5)
