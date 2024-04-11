@@ -3,17 +3,14 @@ import { AxiosError } from "axios";
 
 import useApi from "../api";
 import { ISignInResponse } from "./interfaces/ISignInResponse";
-import { ISignIn } from "./interfaces/ISignIn";
 import { IApiResponse } from "../interfaces/IApiResponse";
 import { useFormatMessage } from "../../utils/useFormatMessage";
-import { ISignUp } from "./interfaces/ISignUp";
 import { IAuth } from "./interfaces/IAuth";
-import { IUser } from "../user/interfaces/IUser";
+import { IToken } from "../interfaces/IToken";
 
 export const useAuthService = () => {
   const onAuthError = () => {
-    // Aqui você pode definir o comportamento desejado quando ocorrer um erro de autenticação
-    // Por exemplo, redirecionar para a tela de login
+    // TODO
   };
   const api = useApi(onAuthError);
   
@@ -36,48 +33,21 @@ export const useAuthService = () => {
       };
     }
   }
-
-  async function signIn(
-    model: ISignIn
-  ): Promise<IApiResponse<ISignInResponse | any>> {
+  
+  const signIn = async (credentials: { mail: string; password: string }): Promise<IToken> => {
     try {
-      const response = await api.post("/Auth/SignIn", model);
-      return { status: response.status, data: response.data };
-    } catch (error: AxiosError | any) {
-      if (error.code === "ERR_NETWORK") {
-        return {
-          status: 503,
-          data: errorMessage("ERR_NETWORK"),
-        };
-      }
-      return {
-        status: error.response.data.status,
-        data: errorMessage(error.response.data),
-      };
+      const response = await api.post('/auth/signin', credentials);
+      const data: ISignInResponse = response.data;
+      const { token } = data;
+      localStorage.setItem('token', JSON.stringify(token));
+      return token;
+    } catch (error: any) {
+      throw new Error(error.response.data.message || 'Failed to sign in');
     }
-  }
-
-  async function signUp(model: ISignUp): Promise<IApiResponse<IUser | any>> {
-    try {
-      const response = await api.post("/Auth/SignUp", model);
-      return { status: response.status, data: response.data };
-    } catch (error: AxiosError | any) {
-      if (error.code === "ERR_NETWORK") {
-        return {
-          status: 503,
-          data: errorMessage("ERR_NETWORK"),
-        };
-      }
-      return {
-        status: error.response.data.status,
-        data: errorMessage(error.response.data),
-      };
-    }
-  }
+  };
 
   return {
     getAuth,
     signIn,
-    signUp,
   };
 };

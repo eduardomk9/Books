@@ -1,13 +1,13 @@
 // AppRoutes.tsx
-import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import LoginPage from "../views/auth/LoginPage";
+import Dashboard from "../views/books/DashBoardPage"; // Importe o componente Dashboard aqui
 
 const AppRoutes = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LoginPage navigate={() => {}} />} />
+        <Route path="/" element={<Dashboard/>} />
+        <Route path="/dashboard" element={<Dashboard />} /> {/* Rota para o Dashboard */}
         {/* Defina outras rotas do seu aplicativo aqui */}
       </Routes>
     </Router>

@@ -19,7 +19,7 @@ console.log(
 );
 
 console.log(
-  `%cEste é um recurso de navegador voltado para desenvolvedores. Se alguém disse para você copiar e colar algo aqui para ativar um recurso do TP Client Help ou "invadir" a conta de outra pessoa, isso é uma fraude e você dará a ele acesso à sua conta.`,
+  `%cEste é um recurso de navegador voltado para desenvolvedores.`,
   `font-size:18px; 
    font-family:'roboto';
    `

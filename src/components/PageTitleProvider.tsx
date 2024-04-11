@@ -16,7 +16,7 @@ export const PageTitleProvider: React.FC<React.PropsWithChildren<{}>> = ({
   const [pageTitle, setPageTitle] = useState("");
 
   useEffect(() => {
-    document.title = `TP Client Help - ${pageTitle}`; // Atualiza o título da página ao pressionar F5
+    document.title = `Books Search${pageTitle}`; // Atualiza o título da página ao pressionar F5
   }, [pageTitle]);
 
   return (
